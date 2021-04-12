@@ -1,0 +1,131 @@
+\documentclass{beamer}
+\usepackage{listings}
+\lstset{
+%language=C,
+frame=single, 
+breaklines=true,
+columns=fullflexible
+}
+\usepackage{subcaption}
+\usepackage{url}
+\usepackage{tikz}
+\usepackage{tkz-euclide} % loads  TikZ and tkz-base
+%\usetkzobj{all}
+\usetikzlibrary{calc,math}
+\usepackage{float}
+\newcommand\norm[1]{\left\lVert#1\right\rVert}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\usepackage[export]{adjustbox}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usetheme{Boadilla}
+\providecommand{\pr}[1]{\ensuremath{\Pr\left(#1\right)}}
+\usepackage{mathtools}
+
+\title{UGC/MATH 2018 (Dec math set-a), Q.116}
+\author{T.Rohan - CS20BTECH11064}
+\date{9th April, 2021}
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{Question}
+
+\begin{block}{}
+ Suppose n units are drawn from a population of N units sequentially as follows. A random sample $U_1, U_2, ... U_N$ of size N, drawn from $U(0, 1)$.The kth population unit is selected if $U_k<\frac{n-n_k}{N-k+1}$, k = 1, 2, ..N, where, $n_1=0, n_k$ = number of units selected out of first k-1 units for each k = 2, 3, ..N. Then,
+\begin{enumerate}[1.]
+    \item The probability of inclusion of the second unit in the sample is $\frac{n}{N}$.
+    \item The probability of including the first and the second unit in the sample is 
+          $\frac{n(n-1)}{N(N-1)}$
+    \item The probability of not including the first and including the second unit in the sample is              $\frac{n(N-n)}{N(N-1)}$
+    \item The probability of including the first and not including the second unit in the sample is              $\frac{n(n-1)}{N(N-1)}$
+\end{enumerate}
+\end{block}
+\end{frame}
+\begin{frame}{}
+    \begin{block}{Explanation}
+    \begin{itemize}
+        \item There are N units of population, out of which n are to be picked.
+        \item From a uniform distribution in (0,1), N units are picked sequentially.
+        \item kth unit corresponds to the kth person in the population.
+        \item The kth person is picked if and only if the condition $U_k<\frac{n-n_k}{N-k+1}$ is satisfied.       Where, $n_k$ are the number of units picked out of the first k-1 units.
+        \item Let $X$ be a random variable, with $X \in \{1, 2,\dots, N\}$, where X=i, when ith unit is        included
+        \item For the inclusion of the first unit in the sample, the condition is $U_1<\frac{n-n_1}{N-(1)+1}$. Here          $n_1$ = 0 is given in the question. Hence $X=1$ if $U_1<\frac{n-(0)}{N}$. 
+              \begin{align}
+                  \therefore \pr{X=1} = \frac{n}{N} \label{eq1}
+              \end{align}
+    \end{itemize}
+    \end{block}
+\end{frame}
+\begin{frame}{Option 1}
+     The probability of inclusion of the second unit in the sample is $\frac{n}{N}$.
+\end{frame}
+\begin{frame}{Solution(Option 1)}
+    For k=2, there are two cases. The first unit being included and excluded.
+    
+    When first unit is included, $n_2 = 1$,
+    \begin{align}
+        U_2 < \frac{n-n_2}{N-2+1} = \frac{n-1}{N-1} \\
+        \therefore\pr{X=2 \mid X=1} = \frac{n-1}{N-1} \label{eq4}\\
+        \pr{X=1, X=2} = \pr{X=1} \times \pr{X=2 \mid X=1}
+    \end{align} 
+From \eqref{eq1} and \eqref{eq4}
+    \begin{align}   
+        \therefore \pr{X=1, X=2} = \frac{n (n-1)}{N (N-1)} \label{eq2} 
+    \end{align}
+\end{frame}
+\begin{frame}{Solution(Option 1) Contd.}
+When first unit is not included, $n_2 = 0$,
+    \begin{align}
+        U_2 < \frac{n-n_2}{N-2+1} = \frac{n}{N-1}\\
+        \therefore \pr{X=2 \mid X\neq 1} = \frac{n}{N-1}\label{eq5}\\
+        \pr{X\neq1, X=2} = \pr{X\neq1} \times \pr{X=2 \mid X\neq1} \\
+    \end{align} 
+From \eqref{eq1} and \eqref{eq5}
+    \begin{align}
+        \therefore \pr{X\neq1,X=2} = 1-\frac{n}{N}\times\frac{n}{N-1} = \frac{n (N-n)}{N (N-1)} \label{eq3}
+    \end{align}
+From \eqref{eq2} and \eqref{eq3}
+\begin{align}
+    \pr{X=2} = \frac{n(n-1)}{N (N-1)} + \frac{n (N-n)}{N (N-1)} = \frac{n}{N}
+\end{align}
+    Hence, option $1$ is correct.
+\end{frame}
+
+\begin{frame}{Option 2}
+   The probability of including the first and the second unit in the sample is $\frac{n(n-1)}{N(N-1)}$
+\end{frame}
+\begin{frame}{Solution(Option 2)}
+From \eqref{eq2}
+    \begin{align}
+        \pr{X=1, X=2} = \frac{n (n-1)}{N (N-1)}
+    \end{align}
+    Hence, option $2$ is correct.
+\end{frame}
+
+\begin{frame}{Option 3}
+    The probability of not including the first and including the second unit in the sample is              $\frac{n(N-n)}{N(N-1)}$
+\end{frame}
+\begin{frame}{Solution(Option 3)}
+From \eqref{eq3}
+    \begin{align}
+        \pr{X\neq1,X=2} = \frac{n (N-n)}{N (N-1)}
+    \end{align}
+    Hence, option $3$ is correct.
+\end{frame}
+\begin{frame}{Option 4}
+    The probability of including the first and not including the second unit in the sample is              $\frac{n(n-1)}{N(N-1)}$
+\end{frame}
+\begin{frame}{Solution(Option 4)}
+    \begin{align}
+       \pr{X=1, X\neq2} = \frac{n}{N} \times 1-\frac{n}{N} = \frac{n(N-n)}{N^2}
+    \end{align}
+    Hence, option $4$ is incorrect.
+
+Therefore, Options 1, 2, 3 are correct
+\end{frame}
+
+\end{document}
